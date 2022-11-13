@@ -13,6 +13,7 @@ use App\Models\Hasil;
 use \Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use PDF;
 
 class KonsultasiController extends Controller
 {
@@ -40,6 +41,7 @@ class KonsultasiController extends Controller
 
     public function hasil_konsultasi(Request $request)
     {
+        $users = User::all();
         $array_bobot = array('0', '0', '0.4', '0.6', '0.8', '1');
         $array_gejala = array();
         $kondisis = $request->kondisi;
@@ -51,18 +53,12 @@ class KonsultasiController extends Controller
                 $array_gejala += array($arkondisi[0] => $arkondisi[1]);
             }
         }
-        // dd($array_gejala);
-        $kondisiAll = Kondisi::orderBy('id', 'ASC')->get();
-        $sqlkondisi = $kondisiAll->toArray();
-        foreach ($sqlkondisi as $row_kondisi) {
-            $array_kondisitext[$row_kondisi['id']] = $row_kondisi['kondisi'];
-        }
-        // dd($array_kondisitext);
+
         $penyakits = Penyakit::orderBy('id', 'ASC')->get();
         $penyakit_array = $penyakits->toArray();
         foreach ($penyakit_array as $row_penyakit) {
-            $nama_penyakit[$row_penyakit['id']] = $row_penyakit['namapenyakit'];
-            $solusi_penyakit[$row_penyakit['id']] = $row_penyakit['solusi'];
+            $nama_penyakit[$row_penyakit['kodepenyakit']] = $row_penyakit['namapenyakit'];
+            $solusi_penyakit[$row_penyakit['kodepenyakit']] = $row_penyakit['solusi'];
         }
         // dd($nama_penyakit);
         $arpenyakit = array();
@@ -71,8 +67,9 @@ class KonsultasiController extends Controller
         // PERHITUNGAN CERTAINTY FACTOR
         foreach ($penyakit_array as $rpenyakit){
 
+            // dd($rpenyakit);
             $basis = DB::table('pengetahuans')
-            ->where('penyakit_id', '=', $rpenyakit['id'])
+            ->where('penyakit_id', '=', $rpenyakit['kodepenyakit'])
             ->get();
             // dd($basis);
             $basis_array = $basis->toArray();
@@ -82,13 +79,16 @@ class KonsultasiController extends Controller
             $c_fold = 0;
 
             foreach ($basis_array as $rgejala){
+                // dd($rgejala);
                 for ($i = 0; $i < count($kondisis); $i++) {
                     $array_kondisi = explode("_", $kondisis[$i]);
                     $gejala = $array_kondisi[0];
                     // dd($array_kondisi, $kondisis, $gejala);
-                    if ($rgejala->id == $gejala) {
+                    // dd($rgejala->gejala_id);
+                    if ($rgejala->gejala_id == $gejala) {
                         $cf = ($rgejala->nilai_cf) * $array_bobot[$array_kondisi[1]];
                         array_push($cf_rule, $cf);
+                        // dd($cf_rule,$cf);
                         $c_fold_arr = [];
                         for ($i = 0; $i < count($cf_rule) - 1; $i++) {
                             $cf1 = $i == 0 ? $cf_rule[$i] : $c_fold;
@@ -108,18 +108,20 @@ class KonsultasiController extends Controller
                     }
                 }
             }
-            // dd($c_fold);
+            // dd($c_fold_arr,$c_fold);
             if ($c_fold > 0) {
-                $arpenyakit += array($rpenyakit['id'] => number_format($c_fold, 5));
+                $arpenyakit += array($rpenyakit['kodepenyakit'] => number_format($c_fold, 5));
                 arsort($arpenyakit);
+                // dd($arpenyakit);
             } elseif ($c_fold == 0) {
-                $arpenyakit += array($rpenyakit['id'] => number_format(0, 0));
+                $arpenyakit += array($rpenyakit['kodepenyakit'] => number_format(0, 0));
             }
         }
-        // dd($arpenyakit);
+        // dd($rpenyakit, $arpenyakit);
         arsort($arpenyakit);
         $input_gejala = serialize($array_gejala);
         $input_penyakit = serialize($arpenyakit);
+        // dd($array_gejala, $arpenyakit);
         $np1 = 0;
         foreach ($arpenyakit as $key1 => $value1) {
             $np1++;
@@ -147,6 +149,9 @@ class KonsultasiController extends Controller
             'penyakit' => $input_penyakit,
             'gejala' => $input_gejala,
         ]);
+
+        // dd($input_gejala, $input_penyakit);
+
         if ($simpan) {
             $get_id_konsultasi  = DB::table('konsultasis')
             ->select('id')
@@ -174,6 +179,7 @@ class KonsultasiController extends Controller
             }
             // dd($arpenyakit);
         // dd($idpkt,$nmpkt,$vlpkt);
-        return view('user.hasil', compact('idpkt','nmpkt','vlpkt','solusi_penyakit','gejalas','penyakits','semua_kondisi_user'));
+        return view('user.hasil', compact('idpkt','nmpkt','vlpkt','solusi_penyakit','gejalas','penyakits','semua_kondisi_user','users'));
     }
+
 }

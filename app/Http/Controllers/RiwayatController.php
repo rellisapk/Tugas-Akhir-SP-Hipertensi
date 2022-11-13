@@ -34,7 +34,7 @@ class RiwayatController extends Controller
     public function index()
     {
 
-        $hasils = Hasil::where('user_id', Auth::user()->id)->paginate(5);;
+        $hasils = Hasil::latest()->where('user_id', Auth::user()->id)->paginate(5);
         // dd($hasils[0]->penyakit->namapenyakit);
         return view('user.riwayat', compact('hasils'))
         ->with('i', (request()->input('page', 1) - 1) * 5);;

@@ -90,7 +90,20 @@ class AnggotaController extends Controller
             'role' => 'required',
         ]);
 
-        $user->update($request->all());
+        if($request->password == NULL){
+            User::where('id', $user->id)->update([
+                'name' => $request['name'],
+                'email' => $request['email'],
+                'role'=> $request['role'],
+            ]);
+        }else{
+            User::where('id', $user->id)->update([
+                'name' => $request['name'],
+                'email' => $request['email'],
+                'password' => Hash::make($request['password']),
+                'role'=> $request['role'],
+            ]);
+        }
 
         return redirect()->route('user.index')
                         ->with('success','user updated successfully');
@@ -108,4 +121,13 @@ class AnggotaController extends Controller
         return redirect()->route('user.index')
                         ->with('success','user deleted successfully');
     }
+
+    // public function search(Request $request)
+	// {
+	// 	$keyword = $request->search;
+    //     $users = User::where('name', 'like', "%" . $keyword . "%")->paginate(5);
+    //     return view('admin.user.show', compact('users'))->with('i', (request()->input('page', 1) - 1) * 5);
+
+	// }
+
 }

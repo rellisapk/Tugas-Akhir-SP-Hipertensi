@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('penyakits', function (Blueprint $table) {
             $table->id();
-            $table->string('kodepenyakit')->unique();
+            $table->integer('kodepenyakit')->unique();
             $table->string('namapenyakit');
             $table->text('solusi');
             $table->timestamps();

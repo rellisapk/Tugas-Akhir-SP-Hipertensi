@@ -25,8 +25,8 @@ class PengetahuanController extends Controller
     public function index()
     {
         $pengetahuans = DB::table('pengetahuans')
-        ->join('penyakits', 'penyakits.id', '=', 'pengetahuans.penyakit_id')
-        ->join('gejalas', 'gejalas.id', '=', 'pengetahuans.gejala_id')
+        ->join('penyakits', 'penyakits.kodepenyakit', '=', 'pengetahuans.penyakit_id')
+        ->join('gejalas', 'gejalas.kodegejala', '=', 'pengetahuans.gejala_id')
         ->select('penyakits.namapenyakit', 'gejalas.namagejala', 'pengetahuans.nilai_cf', 'pengetahuans.id')
         ->paginate(5);
 

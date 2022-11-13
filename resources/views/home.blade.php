@@ -145,7 +145,7 @@
       Diagnosa penyakit hipertensi digunakan bagi para pengguna yang memiliki riwayat penyakit hipertensi.
       Berapa tekanan darah terakhir anda ?
       <div class="modal-body">
-      <input class="form-check-input" type="radio" name="td" id="td" value="L"> Lebih dari 140/100 mmHg<br>
+      <input class="form-check-input" type="radio" name="td" id="td" value="L" > Lebih dari 140/100 mmHg<br>
       <input class="form-check-input" type="radio" name="tdk" id="td" value="K"> Kurang dari 140/100 mmHg
       </div>
     </div>

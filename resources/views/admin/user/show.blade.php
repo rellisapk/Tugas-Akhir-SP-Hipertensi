@@ -20,6 +20,12 @@
             <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-striped" id="table_anggota" width="100%">
+                <!-- <form class="form" method="GET" action="#">
+                    <div class="form-group w-100 mb-3">
+                        <input type="text" name="search" class="form-control w-75 d-inline" id="search" placeholder="Masukkan pencarian">
+                        <button type="submit" class="btn btn-primary mb-1">Search</button>
+                    </div>
+                </form> -->
                 <thead>
                     <tr class="text-center">
                     <th>#</th>

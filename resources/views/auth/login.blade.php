@@ -153,18 +153,42 @@
 {{ csrf_field() }}
 <h4>Please login below!</h4>
 <input type="email" placeholder="email" id="email" name="email" value="{{ old('email') }}" required autofocus>
+@error('email')
+    <span class="invalid-feedback" role="alert">
+        <strong>{{ $message }}</strong>
+    </span>
+@enderror
 <input type="password" placeholder="password" name="password" required>
-<button type="submit">Login</button>
+@error('password')
+    <span class="invalid-feedback" role="alert">
+        <strong>{{ $message }}</strong>
+    </span>
+@enderror
+<button type="submit" style="margin-bottom: 10px;">Login</button>
 </form>
 </div>
-
+@if ($message = Session::get('error'))
+    <div class="alert alert-danger alert-block">
+    <h6 style="font-size: 15px;">{{ $message }}</h6>
+    </div>
+@endif
 <div class="register-form">
 <form method="POST" action="{{ route('register') }}">
 {{ csrf_field() }}
   <h4>Register now to enjoy benifits</h4>
   <input id="name" type="text" placeholder="name" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
   <input type="email" placeholder="email" id="email" name="email" value="{{ old('email') }}" required autofocus>
+  @error('email')
+    <span class="invalid-feedback" role="alert">
+        <strong>{{ $message }}</strong>
+    </span>
+@enderror
   <input type="password" placeholder="password" name="password" required>
+  @error('password')
+    <span class="invalid-feedback" role="alert">
+        <strong>{{ $message }}</strong>
+    </span>
+@enderror
   <input id="password-confirm" type="password" placeholder="confirm password" name="password_confirmation" required autocomplete="new-password">
   <button type="submit">Register</button>
 </form>
@@ -172,10 +196,6 @@
 </div>
 </div>
 
-
-
-
-</body>
 <script>
     document.querySelector("#register").addEventListener("click",openregform)
 function openregform(){
@@ -183,8 +203,6 @@ function openregform(){
   document.querySelector(".login-form").style.display="none";
   document.querySelector("#register").className="active"
   document.querySelector("#login").className=""
-
-
 }
 document.querySelector("#login").addEventListener("click",openlogform)
 function openlogform(){
@@ -192,8 +210,10 @@ function openlogform(){
   document.querySelector(".login-form").style.display="flex";
   document.querySelector("#register").className=""
   document.querySelector("#login").className="active"
-
 }
 </script>
+
+
+</body>
 
 </html>

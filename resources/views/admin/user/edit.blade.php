@@ -32,6 +32,10 @@
                     <option value="user">User</option>
                 </select>
                 </div>
+                <div class="form-group">
+                    <label for="password">Ganti Password</label>
+                    <input type="password" name="password" id="password" class="form-control">
+                </div>
                     <div class="form-group" style="float: right;">
                     <button type="submit" class="btn btn-success">Simpan</button>
                     </div>

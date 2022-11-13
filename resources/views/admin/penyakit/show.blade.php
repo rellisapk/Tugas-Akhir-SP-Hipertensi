@@ -33,7 +33,7 @@
                 @foreach ($penyakits as $penyakit)
                     <tr class="text-center">
                         <td>{{++$i}}</td>
-                        <td>{{$penyakit->kodepenyakit}}</td>
+                        <td>{{'P'. str_pad($penyakit->kodepenyakit, 2, '0', STR_PAD_LEFT)}}</td>
                         <td>{{$penyakit->namapenyakit}}</td>
                         <td>{{$penyakit->solusi}}</td>
                         <td>

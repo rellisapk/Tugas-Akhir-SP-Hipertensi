@@ -32,7 +32,7 @@
                 @foreach ($gejalas as $gejala)
                     <tr class="text-center">
                         <td>{{++$i}}</td>
-                        <td>{{$gejala->kodegejala}}</td>
+                        <td>{{'G'. str_pad($gejala->kodegejala, 2, '0', STR_PAD_LEFT)}}</td>
                         <td>{{$gejala->namagejala}}</td>
                         <td>
                         <form action="{{ route('gejala.destroy', $gejala->id) }}" method="POST">

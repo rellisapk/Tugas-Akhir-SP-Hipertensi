@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('pengetahuans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('gejala_id')->constrained();
-            $table->foreignId('penyakit_id')->constrained();
+            $table->integer('gejala_id')->constrained();
+            $table->integer('penyakit_id')->constrained();
             $table->double('nilai_cf');
             $table->timestamps();
         });

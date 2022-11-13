@@ -2,7 +2,7 @@
 
 @section('content')
 <section id="contact" class="contact">
-    <div class="container" data-aos="fade-up">
+    <div class="container download_pdf" data-aos="fade-up">
         <br>
         <!-- <div class="col-md-12 col-sm-12 mb-3"> -->
         <h2 style="text-align: center;">Hasil Diagnosa</h2>
@@ -41,7 +41,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card" style="margin-top: 2%;">
+                <div class="card" style="margin-top: 5%;">
                     <div class="card-header" style="background-color: rgba(255, 0, 0, 0.4);">
                         <b>Hasil Perhitungan Sistem</b>
                     </div>
@@ -76,7 +76,7 @@
                 </div>
             </div>
         </div>
-                <div class="card" style="margin-top: 2%;">
+                <div class="card" style="margin-top: 5%; margin-bottom: 30px;">
                     <div class="card-header" style="background-color: rgba(255, 143, 0, 1);">
                         <b>Kesimpulan</b>
                     </div>
@@ -91,5 +91,38 @@
             <!-- </div> -->
         <!-- </div> -->
     </div>
+    </div>
+    <button onclick="getPDF()" id="downloadbtn" class="btn btn-danger cetak_pdf" style="float: right; margin-right: 100px; margin-top: -20px">Cetak Hasil</button>
+    <a href="{{route('konsultasi')}}" class="btn btn-warning" style="float: right; margin-left: 80px; margin-right: 20px;  margin-top: -20px">Diagnosa Ulang</a>
 </section>
 @endsection
+<script>
+function getPDF(){
+    var HTML_Width = $(".download_pdf").width();
+    var HTML_Height = $(".download_pdf").height();
+    var top_left_margin = 15;
+    var PDF_Width = HTML_Width+(top_left_margin*2);
+    var PDF_Height = (PDF_Width*1.5)+(top_left_margin*2);
+    var canvas_image_width = HTML_Width;
+    var canvas_image_height = HTML_Height;
+
+    var totalPDFPages = Math.ceil(HTML_Height/PDF_Height)-1;
+
+
+    html2canvas($(".download_pdf")[0],{allowTaint:true}).then(function(canvas) {
+        canvas.getContext('2d');
+        console.log(canvas.height+"  "+canvas.width);
+        var imgData = canvas.toDataURL("image/jpeg", 1.0);
+        var pdf = new jsPDF('p', 'pt',  [PDF_Width, PDF_Height]);
+        pdf.addImage(imgData, 'JPG', top_left_margin, top_left_margin,canvas_image_width,canvas_image_height);
+
+
+        for (var i = 1; i <= totalPDFPages; i++) {
+            pdf.addPage(PDF_Width, PDF_Height);
+            pdf.addImage(imgData, 'JPG', top_left_margin, -(PDF_Height*i)+(top_left_margin*4),canvas_image_width,canvas_image_height);
+        }
+
+        pdf.save("Hasil-Diagnosa-Sistem.pdf");
+    });
+};
+</script>

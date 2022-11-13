@@ -34,4 +34,7 @@ Route::get('/konsultasi', [App\Http\Controllers\KonsultasiController::class, 'in
 Route::get('/riwayat', [App\Http\Controllers\RiwayatController::class, 'index'])->name('riwayat');
 
 Route::post('/hasil', [App\Http\Controllers\KonsultasiController::class, 'hasil_konsultasi'])->name('hasil_konsultasi');
-// Route::post('/hasil2', [App\Http\Controllers\KonsultasiController::class, 'hasil'])->name('hasil');
+Route::get('/hasil/cetak_pdf', [App\Http\Controllers\KonsultasiController::class, 'cetak_pdf'])->name('cetak_hasil');
+
+//Search
+Route::get('/admin/user/search',[App\Http\Controllers\AnggotaController::class, 'search'])->name('user.search');

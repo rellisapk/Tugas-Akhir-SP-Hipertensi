@@ -7,19 +7,6 @@
 </div>
 <div class="section-body">
 <div class="row">
-    <div class="col-lg-12">
-    <div class="card">
-        <div class="container" style="margin: 15px 5px 15px 0;">
-        <h3>Sistem yang akan berfungsi untuk membantu para penderita penyakit hipertensi dalam mendiagnosa
-            tipe penyakit hipertensi yang diderita
-        </h3>
-        </div>
-    </div>
-    </div>
-</div>
-</div>
-
-<div class="row">
 <div class="col-lg-6 col-12">
     <div class="card card-statistic-1">
     <div class="card-icon bg-success">
