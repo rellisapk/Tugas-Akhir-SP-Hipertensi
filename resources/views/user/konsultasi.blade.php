@@ -37,7 +37,7 @@
             $sqlkondisi_array = $sql_get_kondisi->toArray();
             foreach ($sqlkondisi_array as $row_get_kondisi) {
             ?>
-            <input type="radio" name="kondisi[{{$no}}]" data-id="<?php echo $row_get_kondisi->id; ?>" value="<?php echo $gejala->id . '_' . $row_get_kondisi->id ?>"><?php echo $row_get_kondisi->kondisi ?> <br>
+            <input type="radio" name="kondisi[{{$no}}]" data-id="<?php echo $row_get_kondisi->id; ?>" value="<?php echo $gejala->kodegejala . '_' . $row_get_kondisi->id ?>"><?php echo $row_get_kondisi->kondisi ?> <br>
             <?php
             }
             ?>

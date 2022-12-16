@@ -58,7 +58,7 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a href="/home">Home</a></li>
-          <li><a id="modalKonsultasi">Diagnosis</a></li>
+          <li><a href="#" id="modalKonsultasi">Diagnosis</a></li>
           <li><a href="{{route('riwayat')}}">Riwayat</a></li>
           <li><a href="{{ route('logout') }}">Logout</a></li>
         </ul>
@@ -144,6 +144,7 @@
     $('#buttonSubmit').click(function () {
         $('#modalAkhir').modal('hide');
         $('.modal-backdrop').remove();
+        window.location.href = "{{route('home')}}";
     });
 
     $('#modalClose').click(function () {

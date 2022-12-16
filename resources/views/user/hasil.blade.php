@@ -82,8 +82,8 @@
                     </div>
                     <div class="card-body">
                         <p class='font-size: 20px' style='text-align: justify;'>Berdasarkan kondisi yang telah anda pilih pada halaman sebelumnya, dapat disimpulkan bahwa anda
-                        terdapat kemungkinan anda mengalami <b><?php echo $nmpkt[1] ?></b> dengan tingkat akurasi sebesar <b>"<?php echo number_format($vlpkt[1] * 100, 2)?>"%.</b></p>
-                        <p class='font-size: 20px' style='text-align: justify;'><b>Solusi penanganan: </b><?php echo $solusi_penyakit[$idpkt[1]] ?>. </p>
+                        terdapat kemungkinan anda mengalami <b>{{$hasils->penyakit->namapenyakit}}</b> dengan tingkat akurasi sebesar <b>"{{ number_format($hasils->nilai_akurasi * 100, 2)}}"%.</b></p>
+                        <p class='font-size: 20px' style='text-align: justify;'><b>Solusi penanganan: </b>{{$hasils->penyakit->solusi}}. </p>
                         <p class='font-size: 20px' style='text-align: justify; color: red;'>Jika anda mengalami gejala yang membutuhkan pertolongan secepatnya, segeralah berkunjung ke Puskesmas/Rumah
                         sakit terdekat untuk mendapatkan diagnosis langsung dan pengobatan cepat dari dokter.</p>
                     </div>
@@ -121,7 +121,6 @@ function getPDF(){
             pdf.addPage(PDF_Width, PDF_Height);
             pdf.addImage(imgData, 'JPG', top_left_margin, -(PDF_Height*i)+(top_left_margin*4),canvas_image_width,canvas_image_height);
         }
-
         pdf.save("Hasil-Diagnosa-Sistem.pdf");
     });
 };

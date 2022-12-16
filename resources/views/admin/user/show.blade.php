@@ -41,7 +41,11 @@
                         <td>{{++$i}}</td>
                         <td>{{$user->name}}</td>
                         <td>{{$user->email}}</td>
-                        <td>{{$user->role}}</td>
+                        @if($user->role == 'admin')
+                        <td>Admin</td>
+                        @else
+                        <td>User</td>
+                        @endif
                         <td>
                         <form action="{{ route('user.destroy', $user->id) }}" method="POST">
                             <a class="btn btn-primary btn-flat btn-xs" href="{{ route('user.edit',  $user->id)}}"><i class="fa fa-cog"></i></a>

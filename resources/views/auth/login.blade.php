@@ -3,6 +3,9 @@
 <head>
   <title>Sistem Pakar Hipertensi</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Font Awesome JS -->
+  <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"> </script>
+  <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"> </script>
   <style>
     *{
     box-sizing: border-box;
@@ -19,7 +22,14 @@
     justify-content: center;
   }
 
-
+  .container2{
+    width: 100%;
+    height:100%;
+    display: flex;
+    margin:auto;
+    align-items: center;
+    justify-content: center;
+  }
 
   .forms{
     width: 100%;
@@ -142,7 +152,24 @@
 </head>
 <body>
 <h2> SISTEM PAKAR DIAGNOSIS HIPERTENSI </h2>
-<img src="https://media.istockphoto.com/vectors/medical-tonometer-and-high-blood-pressure-risk-of-hypertension-blood-vector-id1283776723?k=20&m=1283776723&s=170667a&w=0&h=Y8wVVi1ZOFt7CV163aT6PxK9NyVKWrh_YwIIP-12kW8=" alt="">
+<section id="hero" class="hero d-flex align-items-center section-bg">
+    <div class="container">
+      <div class="row justify-content-between gy-5">
+        <div class="col-lg-5 order-2 order-lg-1 d-flex flex-column justify-content-center align-items-center align-items-lg-start text-center text-lg-start">
+        <h4><i class='icon fa fa-exclamation-triangle'></i> Perhatian!</h4>
+        <p style="text-align: justify; padding: 20px;">
+  Sistem Pakar Diagnosis Hipertensi adalah sebuah aplikasi untuk mendiagnosis penyakit hipertensi berdasarkan gejala-gejala umum yang sering muncul. Sistem pakar diagnosis penyakit
+hipertensi dikhususkan bagi para pengguna yang telah atau pernah terdiagnosis mengalami penyakit hipertensi dengan ketentuan pernah mengalami tekanan darah tinggi > 140mmHg.
+Sistem pakar diagnosis penyakit hipertensi ini dapat digunakan sebagai diagnosis awal tipe penyakit hipertensi dan solusi selanjutnya terkait penyakit yang diderita.
+Bagi para pengguna yang ingin melakukan diagnosis awal tipe penyakit hipertensi dapat menggunakan aplikasi ini untuk mendapatkan solusi
+penanganan awal.</p>
+        </div>
+        <div class="col-lg-5 order-1 order-lg-2 text-center text-lg-start">
+        <img src="https://media.istockphoto.com/vectors/medical-tonometer-and-high-blood-pressure-risk-of-hypertension-blood-vector-id1283776723?k=20&m=1283776723&s=170667a&w=0&h=Y8wVVi1ZOFt7CV163aT6PxK9NyVKWrh_YwIIP-12kW8=" alt="">
+        </div>
+      </div>
+    </div>
+</section>
 <div class="container">
 <div class="forms">
 <div class="header">
